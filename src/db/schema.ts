@@ -1,18 +1,29 @@
-import { pgTable, serial, text, integer, timestamp, boolean } from "drizzle-orm/pg-core"
+import { pgTable, serial, text, timestamp, boolean, integer, jsonb } from "drizzle-orm/pg-core"
 
 export const users = pgTable("users", {
   id: serial("id").primaryKey(),
-  name: text("name").notNull(),
+
+  username: text("username").notNull(),
+
   email: text("email").notNull().unique(),
+
   password: text("password").notNull(),
+
   isVerified: boolean("is_verified").default(false),
+
   verifyToken: text("verify_token"),
+
   verifyTokenExpiry: timestamp("verify_token_expiry"),
+
   forgotPasswordToken: text("forgot_password_token"),
+
   forgotPasswordTokenExpiry: timestamp("forgot_password_token_expiry"),
+
   createdAt: timestamp("created_at").defaultNow(),
+
   updatedAt: timestamp("updated_at").defaultNow(),
 })
+
 
 export const resumes = pgTable("resumes", {
   id: serial("id").primaryKey(),
@@ -22,10 +33,6 @@ export const resumes = pgTable("resumes", {
     .references(() => users.id, { onDelete: "cascade" }),
 
   title: text("title").notNull(),
-
-  thumbnailLink: text("thumbnail_link"),
-
-  theme: text("theme"),
 
   fullName: text("full_name"),
 
@@ -45,131 +52,24 @@ export const resumes = pgTable("resumes", {
 
   website: text("website"),
 
-  createdAt: timestamp("created_at").defaultNow(),
+  theme: text("theme"),
 
-  updatedAt: timestamp("updated_at").defaultNow(),
-})
+  thumbnailLink: text("thumbnail_link"),
 
-export const workExperience = pgTable("work_experience", {
-  id: serial("id").primaryKey(),
+  // Arrays using JSON
+  skills: jsonb("skills"),
 
-  resumeId: integer("resume_id")
-    .notNull()
-    .references(() => resumes.id, { onDelete: "cascade" }),
+  projects: jsonb("projects"),
 
-  company: text("company"),
+  education: jsonb("education"),
 
-  role: text("role"),
+  workExperience: jsonb("work_experience"),
 
-  startDate: timestamp("start_date"),
+  certifications: jsonb("certifications"),
 
-  endDate: timestamp("end_date"),
+  languages: jsonb("languages"),
 
-  description: text("description"),
-
-  createdAt: timestamp("created_at").defaultNow(),
-
-  updatedAt: timestamp("updated_at").defaultNow(),
-})
-
-export const education = pgTable("education", {
-  id: serial("id").primaryKey(),
-
-  resumeId: integer("resume_id")
-    .notNull()
-    .references(() => resumes.id, { onDelete: "cascade" }),
-
-  degree: text("degree"),
-
-  institution: text("institution"),
-
-  startDate: timestamp("start_date"),
-
-  endDate: timestamp("end_date"),
-
-  createdAt: timestamp("created_at").defaultNow(),
-
-  updatedAt: timestamp("updated_at").defaultNow(),
-})
-
-export const skills = pgTable("skills", {
-  id: serial("id").primaryKey(),
-
-  resumeId: integer("resume_id")
-    .notNull()
-    .references(() => resumes.id, { onDelete: "cascade" }),
-
-  name: text("name"),
-
-  progress: integer("progress"),
-
-  createdAt: timestamp("created_at").defaultNow(),
-
-  updatedAt: timestamp("updated_at").defaultNow(),
-})
-
-export const projects = pgTable("projects", {
-  id: serial("id").primaryKey(),
-
-  resumeId: integer("resume_id")
-    .notNull()
-    .references(() => resumes.id, { onDelete: "cascade" }),
-
-  title: text("title"),
-
-  description: text("description"),
-
-  github: text("github"),
-
-  liveDemo: text("live_demo"),
-
-  createdAt: timestamp("created_at").defaultNow(),
-
-  updatedAt: timestamp("updated_at").defaultNow(),
-})
-
-export const certifications = pgTable("certifications", {
-  id: serial("id").primaryKey(),
-
-  resumeId: integer("resume_id")
-    .notNull()
-    .references(() => resumes.id, { onDelete: "cascade" }),
-
-  title: text("title"),
-
-  issuer: text("issuer"),
-
-  year: text("year"),
-
-  createdAt: timestamp("created_at").defaultNow(),
-
-  updatedAt: timestamp("updated_at").defaultNow(),
-})
-
-export const languages = pgTable("languages", {
-  id: serial("id").primaryKey(),
-
-  resumeId: integer("resume_id")
-    .notNull()
-    .references(() => resumes.id, { onDelete: "cascade" }),
-
-  name: text("name"),
-
-  progress: integer("progress"),
-
-  createdAt: timestamp("created_at").defaultNow(),
-
-  updatedAt: timestamp("updated_at").defaultNow(),
-})
-
-export const interests = pgTable("interests", {
-  id: serial("id").primaryKey(),
-
-  resumeId: integer("resume_id")
-    .notNull()
-    .references(() => resumes.id, { onDelete: "cascade" }),
-
-  interest: text("interest"),
+  interests: jsonb("interests"),
 
   createdAt: timestamp("created_at").defaultNow(),
 
