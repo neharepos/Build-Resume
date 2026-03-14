@@ -45,6 +45,8 @@ export async function POST(request:NextRequest){
 
          console.log(savedUser);
 
+        console.log("Sending email to:", email);
+        console.log("User ID:", savedUser.id);
 
          // send verification email
 

@@ -9,6 +9,14 @@ export async function GET(request: NextRequest) {
   try {
     const userId = await getDataFromToken(request);
 
+    // if (!userId) {
+    //   return NextResponse.json(
+    //     { error: "Unauthorized" },
+    //     { status: 401 }
+    //   );
+    // }
+     console.log("User ID from token:", userId);
+
     const user = await db
       .select({
         id: users.id,
@@ -17,7 +25,9 @@ export async function GET(request: NextRequest) {
         createdAt: users.createdAt,
       })
       .from(users)
-      .where(eq(users.id, userId));
+      .where(eq(users.id, Number(userId)));
+
+      console.log("User from DB:", user);
 
     return NextResponse.json({
       message: "User found",

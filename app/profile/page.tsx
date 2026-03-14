@@ -26,7 +26,7 @@ export default function ProfilePage(){
         const getUserDetails = async() => {
             const res = await axios.get('/api/users/me',  { withCredentials: true })
             console.log(res.data);
-            setData(res.data.data._id)
+            setData(res.data.data.id)
         }
     return(
         <div className="flex flex-col items-center justify-center min-h-screen py-2">

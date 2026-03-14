@@ -3,7 +3,7 @@ import Link from "next/link";
 import React, {useEffect} from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import { toast } from "react-hot-toast/headless";
+import { toast } from "react-hot-toast";
 
 
 
@@ -25,8 +25,12 @@ export default function LoginPage(){
             toast.success("Login success")
             router.push("/profile")
         } catch(error: any){
-            console.log("Login failed", error.message);
-            toast.error(error.message);
+            // console.log("Login failed", error.message);
+            // toast.error(error.message);
+
+            console.log("Login failed", error.response?.data || error.message);
+
+    toast.error(error.response?.data?.error || "Login failed");
         }finally{
             setloading(false);
         }
@@ -68,9 +72,17 @@ export default function LoginPage(){
                 placeholder="password"
                 />
 
-                <button 
+                {/* <button 
                 onClick={onLogin}
-                className="p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600">Login here</button>
+                className="p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600">Login here</button> */}
+
+                <button
+  onClick={onLogin}
+  disabled={buttonDisabled || loading}
+  className="p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600"
+>
+  {buttonDisabled ? "Enter credentials" : "Login"}
+</button>
 
                 <Link href="/signup">Visit signup page</Link>
         </div>

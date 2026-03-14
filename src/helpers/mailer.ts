@@ -17,6 +17,12 @@ export const sendEmail = async ({
   userId,
 }: EmailParams) => {
   try {
+
+    console.log("HOST:", process.env.MAILTRAP_HOST);
+    console.log("PORT:", process.env.MAILTRAP_PORT);
+    console.log("USER:", process.env.MAILTRAP_USER);
+    console.log("PASS:", process.env.MAILTRAP_PASS);
+
     // create hashed token
     const hashedToken = await bcryptjs.hash(userId.toString(), 10);
 
@@ -40,14 +46,23 @@ export const sendEmail = async ({
         .where(eq(users.id, userId));
     }
 
+    // const transport = nodemailer.createTransport({
+    //   host: process.env.MAILTRAP_HOST,
+    //   port: Number(process.env.MAILTRAP_PORT) || 2525,
+    //   auth: {
+    //     user: process.env.MAILTRAP_USER,
+    //     pass: process.env.MAILTRAP_PASS,
+    //   },
+    // });
+    
     const transport = nodemailer.createTransport({
-      host: process.env.MAILTRAP_HOST,
-      port: Number(process.env.MAILTRAP_PORT) || 2525,
-      auth: {
-        user: process.env.MAILTRAP_USER,
-        pass: process.env.MAILTRAP_PASS,
-      },
-    });
+  host: "sandbox.smtp.mailtrap.io",
+  port: 2525,
+  auth: {
+    user: "e19f490b3e6690",
+    pass: "8c37376c888579",
+  },
+});
 
      const link =
       emailType === "VERIFY"
