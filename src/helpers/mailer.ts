@@ -5,6 +5,7 @@ import { db } from "@/src/db/index";
 import { users } from "@/src/db/schema";
 import { eq } from "drizzle-orm";
 import { configDotenv } from "dotenv";
+
 type EmailParams = {
   email: string;
   emailType: "VERIFY" | "RESET";

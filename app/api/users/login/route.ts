@@ -22,20 +22,24 @@ export async function POST(request: NextRequest) {
     if (existingUser.length === 0) {
       return NextResponse.json(
         { error: "User does not exist" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
     const user = existingUser[0];
 
+    if (!user.isVerified) {
+    return NextResponse.json(
+        { error: "Please verify your email before logging in" },
+        { status: 403 }
+    );
+}
+
     // compare password
     const validPassword = await bcrypt.compare(password, user.password);
 
     if (!validPassword) {
-      return NextResponse.json(
-        { error: "Invalid password" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Invalid password" }, { status: 400 });
     }
 
     // create token data
@@ -53,19 +57,21 @@ export async function POST(request: NextRequest) {
     const response = NextResponse.json({
       message: "Login successful",
       success: true,
-      path: "/",
-
+      user: {
+        username: user.username,
+        email: user.email,
+      },
     });
 
     response.cookies.set("token", token, {
       httpOnly: true,
+      sameSite: "strict", // Prevents CSRF attacks
+      path: "/", // Cookie available for the whole site
+      maxAge: 60 * 60 * 24,
     });
 
     return response;
   } catch (error: any) {
-    return NextResponse.json(
-      { error: error.message },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
