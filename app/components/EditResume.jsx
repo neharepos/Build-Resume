@@ -1,3 +1,4 @@
+"use client"
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import DashboardLayout from './DashboardLayout'
 import { containerStyles, buttonStyles, statusStyles, iconStyles } from '../assets/dummystyle'

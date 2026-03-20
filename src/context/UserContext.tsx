@@ -1,6 +1,6 @@
 "use client"; // Mandatory for Next.js Context
 
-import React, { createContext, useState, useEffect, ReactNode } from "react";
+import React, { createContext, useState, useEffect, ReactNode, useContext } from "react";
 import { API_PATHS } from "../utils/apiPaths";
 
 // 1. Define the User Type (Adjust properties based on your backend)
@@ -85,3 +85,18 @@ const UserProvider = ({ children }: { children: ReactNode }) => {
 
 
 export default UserProvider;
+
+export const useUser = () => {
+    const context = useContext(UserContext);
+    if (context === undefined || context === null) {
+        // This "fake" object prevents the app from crashing 
+        // while Next.js is still loading the actual context.
+        return { 
+            user: null, 
+            loading: true, 
+            updateUser: () => {}, 
+            clearUser: () => {} 
+        };
+    }
+    return context;
+};

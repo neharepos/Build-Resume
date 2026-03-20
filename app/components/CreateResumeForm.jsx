@@ -1,3 +1,4 @@
+"use client"
 import React, { useState } from 'react'
 import { Input } from './Input'
 // import { useNavigate } from 'react-router-dom'
@@ -10,7 +11,8 @@ const CreateResumeForm = ({onSuccess}) => {
 
   const [title, setTitle] = useState("");
   const [error, setError] = useState(null)
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
+  const router = useRouter
 
   const handleCreateResume = async(e) => {
     e.preventDefault();

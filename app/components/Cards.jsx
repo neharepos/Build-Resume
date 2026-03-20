@@ -1,7 +1,8 @@
-import { useContext, useState } from 'react'
+"use client"
+import { useState } from 'react'
 // import { useNavigate } from 'react-router-dom'
 import { useRouter } from 'next/navigation'
-import { UserContext } from '@/src/context/UserContext'
+import { useUser } from '@/src/context/UserContext'
 import { cardStyles } from '@/public/assets/dummystyle'
 import { Award, Check, Clock, Edit, Trash2, TrendingUp, Zap } from 'lucide-react'
 
@@ -9,13 +10,23 @@ import { Award, Check, Clock, Edit, Trash2, TrendingUp, Zap } from 'lucide-react
 
 export const ProfileInCard = () => {
   const router = useRouter()
-  const { user, clearUser } = useContext(UserContext)
+  // const { user, clearUser } = useContext(UserContext)
+  const { user, clearUser, loading } = useUser()
+
+  // if (!user) return null;
+  // const context = useContext(UserContext);
+  
+  // if (!context) return null; 
+
+  // const { user, clearUser } = context;
 
   const handleLogout = () => {
     localStorage.clear();
     clearUser();
     router.push('/')
   }
+
+  if (loading || !user) return null;
 
   return (
     user && (

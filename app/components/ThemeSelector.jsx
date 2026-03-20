@@ -1,3 +1,4 @@
+"use client"
 import React, { useRef, useState, useEffect } from 'react'
 import { DUMMY_RESUME_DATA, resumeTemplates } from '../utils/data'
 import { TemplateCard } from './Cards'

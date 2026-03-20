@@ -1,3 +1,4 @@
+"use client"
 import React, { useEffect, useRef, useState } from "react";
 import { LuMail, LuPhone, LuGithub, LuGlobe } from "react-icons/lu";
 import { RiLinkedinLine } from "react-icons/ri";

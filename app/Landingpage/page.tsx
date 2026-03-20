@@ -12,7 +12,13 @@ import Login from '../components/Login';
 import Signup from '../components/Signup';
 
 const LandingPage = () => {
-    const { user } = useContext(UserContext);
+    const context = useContext(UserContext);
+
+    if(!context){
+        return null;
+    }
+
+    const {user} = context
     const router = useRouter();
     
     const [openAuthModel, setOpenAuthModel] = useState(false);
