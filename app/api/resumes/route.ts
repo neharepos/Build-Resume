@@ -8,6 +8,9 @@ import { eq, desc } from "drizzle-orm";
 export async function GET(request: NextRequest) {
     try {
         const userId = await getDataFromToken(request);
+        if (!userId) {
+            return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+        }
         const userResumes = await db.select().from(resumes).where(eq(resumes.userId, userId)).orderBy(desc(resumes.updatedAt));
         return NextResponse.json(userResumes);
     } catch (error: any) {
@@ -19,15 +22,26 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
     try {
         const userId = await getDataFromToken(request);
+        if (!userId) {
+            return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+        }
         const {title} = await request.json();
-        
+
+        // The Drizzle schema uses flat columns for profile & contact info, not nested objects.
         const defaultResumeData = {
-            profileInfo: { fullName: '', designation: '', summary: '', profileImg: null },
-            contactInfo: { email: '', phone: '', location: '', linkedin: '', github: '', website: '' },
-            workExperience: [],
-            education: [],
+            fullName: '',
+            designation: '',
+            summary: '',
+            email: '',
+            phone: '',
+            location: '',
+            linkedin: '',
+            github: '',
+            website: '',
             skills: [],
             projects: [],
+            education: [],
+            workExperience: [],
             certifications: [],
             languages: [],
             interests: [],
@@ -40,7 +54,8 @@ export async function POST(request: NextRequest) {
         }).returning();
 
         return NextResponse.json(newResume[0], { status: 201 });
-    } catch (error: any) {
-        return NextResponse.json({ error: error.message }, { status: 500 });
+    } catch (error: unknown) {
+        const message = error instanceof Error ? error.message : "An unknown error occurred";
+        return NextResponse.json({ error: message }, { status: 500 });
     }
 }

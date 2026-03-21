@@ -8,9 +8,9 @@ import {
   ProjectInfo,
   CertificationInfo,
 } from "./ResumeSection";
-import { formatYearMonth } from "../utils/helper";
+import { formatYearMonth } from "@/src/utils/helper";
 
-const DEFAULT_THEME = ["#ffffff", "#0d47a1", "#1e88e5", "#64b5f6", "#bbdefb"];
+// const DEFAULT_THEME = ["#ffffff", "#0d47a1", "#1e88e5", "#64b5f6", "#bbdefb"];
 
 const Title = ({ text, color }) => (
   <div className="relative w-fit mb-2 resume-section-title">
@@ -21,7 +21,7 @@ const Title = ({ text, color }) => (
   </div>
 );
 
-const TemplateOne = ({ resumeData = {}, colorPalette, containerWidth }) => {
+const TemplateOne = ({ resumeData = {}, colorPalette = [], containerWidth }) => {
   const {
     profileInfo = {},
     contactInfo = {},
@@ -139,7 +139,7 @@ const TemplateOne = ({ resumeData = {}, colorPalette, containerWidth }) => {
                       exp.endDate
                     )}`}
                     description={exp.description}
-                    durationColor={[2]}
+                    durationColor={colorPalette[2]}
                     
                   />
                 ))}
@@ -177,7 +177,7 @@ const TemplateOne = ({ resumeData = {}, colorPalette, containerWidth }) => {
                   <span
                     key={i}
                     className="text-xs font-medium px-2 py-1 rounded"
-                    style={{ backgroundColor: [4] }}
+                    style={{ backgroundColor: colorPalette[4] }}
                   >
                     {skill.name}
                   </span>
@@ -216,7 +216,7 @@ const TemplateOne = ({ resumeData = {}, colorPalette, containerWidth }) => {
                     title={cert.title}
                     issuer={cert.issuer}
                     year={cert.year}
-                    bgColor={[4]}
+                    bgColor={colorPalette[4]}
                    
                   />
                 ))}
@@ -232,7 +232,7 @@ const TemplateOne = ({ resumeData = {}, colorPalette, containerWidth }) => {
                   <span
                     key={i}
                     className="text-xs font-medium px-2 py-1 rounded"
-                    style={{ backgroundColor: [4] }}
+                    style={{ backgroundColor: colorPalette[4] }}
                   >
                     {lang.name}
                   </span>

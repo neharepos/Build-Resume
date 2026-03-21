@@ -3,7 +3,8 @@ import { useState } from 'react'
 // import { useNavigate } from 'react-router-dom'
 import { useRouter } from 'next/navigation'
 import { useUser } from '@/src/context/UserContext'
-import { cardStyles } from '@/public/assets/dummystyle'
+import axiosInstance from '@/src/utils/axiosInstance'
+import { cardStyles } from '@/src/assets/dummystyle'
 import { Award, Check, Clock, Edit, Trash2, TrendingUp, Zap } from 'lucide-react'
 
 // PROFILE INFO CARDS
@@ -20,7 +21,12 @@ export const ProfileInCard = () => {
 
   // const { user, clearUser } = context;
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    try {
+      await axiosInstance.get('/api/users/logout');
+    } catch (error) {
+      console.error("Logout API failed", error);
+    }
     localStorage.clear();
     clearUser();
     router.push('/')
@@ -33,13 +39,13 @@ export const ProfileInCard = () => {
       <div className={cardStyles.profileCard}>
         <div className={cardStyles.profileInitialsContainer}>
           <span className={cardStyles.profileInitialsText}>
-            {user.name ? user.name.charAt(0).toUpperCase() : ""}
+            {user.username ? user.username.charAt(0).toUpperCase() : ""}
           </span>
         </div>
 
         <div>
           <div className={cardStyles.profileName}>
-            {user.name || ""}
+            {user.username || ""}
           </div>
           <button className={cardStyles.logoutButton}
             onClick={handleLogout}>
@@ -55,7 +61,7 @@ export const ProfileInCard = () => {
 
 export const ResumeSummaryCard = ({
   title = "Untitled Resume",
-  imgUrl,
+  imgUrl: _imgUrl,
   createdAt = null,
   updatedAt = null,
   onSelect,
@@ -231,7 +237,7 @@ export const TemplateCard = ({ thumbnailImg, isSelected, onSelect }) => {
       }`} onClick={onSelect}>
       {thumbnailImg ? (
         <div className='relative w-full h-full overflow-hidden'>
-          <img src={thumbnailImg || 'placehiolder.svg'} alt="Template Review" className='w-full h-full
+          <img src={thumbnailImg || 'placeholder.svg'} alt="Template Review" className='w-full h-full
           object-cover group-hover:scale-110 transition-transform duration-700'/>
 
           <div className='absolute inset-0 bg-gradient-to-t from-white/80 via-transparent

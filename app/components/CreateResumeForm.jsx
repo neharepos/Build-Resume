@@ -3,16 +3,16 @@ import React, { useState } from 'react'
 import { Input } from './Input'
 // import { useNavigate } from 'react-router-dom'
 import { useRouter } from 'next/navigation'
-// import axiosInstance from '../utils/axiosInstance';
+import axiosInstance from '@/src/utils/axiosInstance';
 import { API_PATHS } from '@/src/utils/apiPaths'
 
 
-const CreateResumeForm = ({onSuccess}) => {
+const CreateResumeForm = ({onSuccess: _onSuccess}) => {
 
   const [title, setTitle] = useState("");
   const [error, setError] = useState(null)
   // const navigate = useNavigate()
-  const router = useRouter
+  const router = useRouter()
 
   const handleCreateResume = async(e) => {
     e.preventDefault();
@@ -27,8 +27,8 @@ const CreateResumeForm = ({onSuccess}) => {
       const response = await axiosInstance.post(API_PATHS.RESUME.CREATE, {
         title,
       })
-      if(response.data?._id){
-        navigate(`/resume/${response.data?._id}`)
+      if(response.data?.id){
+        router.push(`/editor/${response.data.id}`)
       }
     }
       catch(error){

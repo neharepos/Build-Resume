@@ -1,0 +1,350 @@
+
+> build-resume@0.1.0 build
+> next build
+
+▲ Next.js 16.1.6 (Turbopack)
+- Environments: .env
+
+  Creating an optimized production build ...
+
+> Build error occurred
+Error: Turbopack build failed with 12 errors:
+./app/components/EditResume.jsx:8:1
+Module not found: Can't resolve '../utils/apiPaths'
+[0m [90m  6 |[39m [36mimport[39m { useParams[33m,[39m useRouter } [36mfrom[39m [32m'next/navigation'[39m
+ [90m  7 |[39m [36mimport[39m { [33mAlertCircle[39m[33m,[39m [33mArrowLeft[39m[33m,[39m [33mCheck[39m[33m,[39m [33mDownload[39m[33m,[39m [33mLoader2[39m[33m,[39m [33mPalette[39m[33m,[39m [33mSave[39m[33m,[39m [33mTrash2[39m } [36mfrom[39m [32m'lucide-react'[39m
+[31m[1m>[22m[39m[90m  8 |[39m [36mimport[39m { [33mAPI_PATHS[39m } [36mfrom[39m [32m'../utils/apiPaths'[39m
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m  9 |[39m [36mimport[39m axiosInstance [36mfrom[39m [32m'../utils/axiosInstance'[39m
+ [90m 10 |[39m [36mimport[39m toast [36mfrom[39m [32m'react-hot-toast'[39m
+ [90m 11 |[39m [36mimport[39m { fixTailwindColors } [36mfrom[39m [32m'../utils/color'[39m[0m
+
+
+
+Import trace:
+  Server Component:
+    ./app/components/EditResume.jsx
+    ./app/editor/[id]/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./app/components/EditResume.jsx:9:1
+Module not found: Can't resolve '../utils/axiosInstance'
+[0m [90m  7 |[39m [36mimport[39m { [33mAlertCircle[39m[33m,[39m [33mArrowLeft[39m[33m,[39m [33mCheck[39m[33m,[39m [33mDownload[39m[33m,[39m [33mLoader2[39m[33m,[39m [33mPalette[39m[33m,[39m [33mSave[39m[33m,[39m [33mTrash2[39m } [36mfrom[39m [32m'lucide-react'[39m
+ [90m  8 |[39m [36mimport[39m { [33mAPI_PATHS[39m } [36mfrom[39m [32m'../utils/apiPaths'[39m
+[31m[1m>[22m[39m[90m  9 |[39m [36mimport[39m axiosInstance [36mfrom[39m [32m'../utils/axiosInstance'[39m
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 10 |[39m [36mimport[39m toast [36mfrom[39m [32m'react-hot-toast'[39m
+ [90m 11 |[39m [36mimport[39m { fixTailwindColors } [36mfrom[39m [32m'../utils/color'[39m
+ [90m 12 |[39m [36mimport[39m { [33mAdditionalInfoForm[39m[33m,[39m [33mCertificationInfoForm[39m[33m,[39m [33mContactInfoForm[39m[33m,[39m [33mEducationDetailsForm[39m[33m,[39m [33mProfileInfoForm[39m[33m,[39m [33mProjectDetailForm[39m[33m,[39m [33mSkillsInfoForm[39m[33m,[39m [33mWorkExperienceForm[39m } [36mfrom[39m [32m'./Forms'[39m[0m
+
+
+
+Import trace:
+  Server Component:
+    ./app/components/EditResume.jsx
+    ./app/editor/[id]/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./app/components/EditResume.jsx:11:1
+Module not found: Can't resolve '../utils/color'
+[0m [90m  9 |[39m [36mimport[39m axiosInstance [36mfrom[39m [32m'../utils/axiosInstance'[39m
+ [90m 10 |[39m [36mimport[39m toast [36mfrom[39m [32m'react-hot-toast'[39m
+[31m[1m>[22m[39m[90m 11 |[39m [36mimport[39m { fixTailwindColors } [36mfrom[39m [32m'../utils/color'[39m
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 12 |[39m [36mimport[39m { [33mAdditionalInfoForm[39m[33m,[39m [33mCertificationInfoForm[39m[33m,[39m [33mContactInfoForm[39m[33m,[39m [33mEducationDetailsForm[39m[33m,[39m [33mProfileInfoForm[39m[33m,[39m [33mProjectDetailForm[39m[33m,[39m [33mSkillsInfoForm[39m[33m,[39m [33mWorkExperienceForm[39m } [36mfrom[39m [32m'./Forms'[39m
+ [90m 13 |[39m [36mimport[39m html2pdf [36mfrom[39m [32m'html2pdf.js'[39m
+ [90m 14 |[39m [36mimport[39m [33mStepProgress[39m [36mfrom[39m [32m'./StepProgress'[39m[0m
+
+
+
+Import trace:
+  Server Component:
+    ./app/components/EditResume.jsx
+    ./app/editor/[id]/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./app/components/ThemeSelector.jsx:3:1
+Module not found: Can't resolve '../utils/data'
+[0m [90m 1 |[39m [32m"use client"[39m
+ [90m 2 |[39m [36mimport[39m [33mReact[39m[33m,[39m { useRef[33m,[39m useState[33m,[39m useEffect } [36mfrom[39m [32m'react'[39m
+[31m[1m>[22m[39m[90m 3 |[39m [36mimport[39m { [33mDUMMY_RESUME_DATA[39m[33m,[39m resumeTemplates } [36mfrom[39m [32m'../utils/data'[39m
+ [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 4 |[39m [36mimport[39m { [33mTemplateCard[39m } [36mfrom[39m [32m'./Cards'[39m
+ [90m 5 |[39m [36mimport[39m [33mTabs[39m [36mfrom[39m [32m'./Tabs'[39m[33m;[39m
+ [90m 6 |[39m [36mimport[39m { [33mCheck[39m } [36mfrom[39m [32m'lucide-react'[39m[33m;[39m[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./app/components/ThemeSelector.jsx [Client Component Browser]
+    ./app/components/EditResume.jsx [Client Component Browser]
+    ./app/components/EditResume.jsx [Server Component]
+    ./app/editor/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/components/ThemeSelector.jsx [Client Component SSR]
+    ./app/components/EditResume.jsx [Client Component SSR]
+    ./app/components/EditResume.jsx [Server Component]
+    ./app/editor/[id]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./app/components/TemplateOne.jsx:11:1
+Module not found: Can't resolve '../utils/helper'
+[0m [90m  9 |[39m   [33mCertificationInfo[39m[33m,[39m
+ [90m 10 |[39m } [36mfrom[39m [32m"./ResumeSection"[39m[33m;[39m
+[31m[1m>[22m[39m[90m 11 |[39m [36mimport[39m { formatYearMonth } [36mfrom[39m [32m"../utils/helper"[39m[33m;[39m
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 12 |[39m
+ [90m 13 |[39m [36mconst[39m [33mDEFAULT_THEME[39m [33m=[39m [[32m"#ffffff"[39m[33m,[39m [32m"#0d47a1"[39m[33m,[39m [32m"#1e88e5"[39m[33m,[39m [32m"#64b5f6"[39m[33m,[39m [32m"#bbdefb"[39m][33m;[39m
+ [90m 14 |[39m[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./app/components/TemplateOne.jsx [Client Component Browser]
+    ./app/components/RenderResume.jsx [Client Component Browser]
+    ./app/components/EditResume.jsx [Client Component Browser]
+    ./app/components/EditResume.jsx [Server Component]
+    ./app/editor/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/components/TemplateOne.jsx [Client Component SSR]
+    ./app/components/RenderResume.jsx [Client Component SSR]
+    ./app/components/EditResume.jsx [Client Component SSR]
+    ./app/components/EditResume.jsx [Server Component]
+    ./app/editor/[id]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./app/components/TemplateThree.jsx:3:1
+Module not found: Can't resolve '../utils/helper'
+[0m [90m 1 |[39m [32m"use client"[39m
+ [90m 2 |[39m [36mimport[39m [33mReact[39m[33m,[39m { useEffect[33m,[39m useRef[33m,[39m useState } [36mfrom[39m [32m"react"[39m[33m;[39m
+[31m[1m>[22m[39m[90m 3 |[39m [36mimport[39m { formatYearMonth } [36mfrom[39m [32m"../utils/helper"[39m[33m;[39m
+ [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 4 |[39m
+ [90m 5 |[39m [36mconst[39m [33mTemplateThree[39m [33m=[39m ({ resumeData [33m=[39m {}[33m,[39m containerWidth }) [33m=>[39m {
+ [90m 6 |[39m   [36mconst[39m {[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./app/components/TemplateThree.jsx [Client Component Browser]
+    ./app/components/RenderResume.jsx [Client Component Browser]
+    ./app/components/EditResume.jsx [Client Component Browser]
+    ./app/components/EditResume.jsx [Server Component]
+    ./app/editor/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/components/TemplateThree.jsx [Client Component SSR]
+    ./app/components/RenderResume.jsx [Client Component SSR]
+    ./app/components/EditResume.jsx [Client Component SSR]
+    ./app/components/EditResume.jsx [Server Component]
+    ./app/editor/[id]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./app/components/TemplateTwo.jsx:4:1
+Module not found: Can't resolve '../utils/helper'
+[0m [90m 2 |[39m [36mimport[39m [33mReact[39m[33m,[39m { useEffect[33m,[39m useRef[33m,[39m useState } [36mfrom[39m [32m"react"[39m[33m;[39m
+ [90m 3 |[39m [36mimport[39m { [33mLuExternalLink[39m[33m,[39m [33mLuGithub[39m } [36mfrom[39m [32m"react-icons/lu"[39m[33m;[39m
+[31m[1m>[22m[39m[90m 4 |[39m [36mimport[39m { formatYearMonth } [36mfrom[39m [32m"../utils/helper"[39m[33m;[39m
+ [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 5 |[39m
+ [90m 6 |[39m [36mconst[39m sectionTitleClass [33m=[39m [32m"text-base font-bold uppercase tracking-wide mb-1 pb-1 border-b border-gray-300"[39m[33m;[39m
+ [90m 7 |[39m[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./app/components/TemplateTwo.jsx [Client Component Browser]
+    ./app/components/RenderResume.jsx [Client Component Browser]
+    ./app/components/EditResume.jsx [Client Component Browser]
+    ./app/components/EditResume.jsx [Server Component]
+    ./app/editor/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/components/TemplateTwo.jsx [Client Component SSR]
+    ./app/components/RenderResume.jsx [Client Component SSR]
+    ./app/components/EditResume.jsx [Client Component SSR]
+    ./app/components/EditResume.jsx [Server Component]
+    ./app/editor/[id]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./app/components/CreateResumeForm.jsx:6:1
+Module not found: Can't resolve '@/src/utils/axiosInstance'
+[0m [90m 4 |[39m [90m// import { useNavigate } from 'react-router-dom'[39m
+ [90m 5 |[39m [36mimport[39m { useRouter } [36mfrom[39m [32m'next/navigation'[39m
+[31m[1m>[22m[39m[90m 6 |[39m [36mimport[39m axiosInstance [36mfrom[39m [32m'@/src/utils/axiosInstance'[39m[33m;[39m
+ [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 7 |[39m [36mimport[39m { [33mAPI_PATHS[39m } [36mfrom[39m [32m'@/src/utils/apiPaths'[39m
+ [90m 8 |[39m
+ [90m 9 |[39m[0m
+
+Import map: aliased to relative './src/utils/axiosInstance' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/components/CreateResumeForm.jsx [Client Component Browser]
+    ./app/Dashboard/page.tsx [Client Component Browser]
+    ./app/Dashboard/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/components/CreateResumeForm.jsx [Client Component SSR]
+    ./app/Dashboard/page.tsx [Client Component SSR]
+    ./app/Dashboard/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./app/components/EditResume.jsx:13:1
+Module not found: Can't resolve 'html2pdf.js'
+[0m [90m 11 |[39m [36mimport[39m { fixTailwindColors } [36mfrom[39m [32m'../utils/color'[39m
+ [90m 12 |[39m [36mimport[39m { [33mAdditionalInfoForm[39m[33m,[39m [33mCertificationInfoForm[39m[33m,[39m [33mContactInfoForm[39m[33m,[39m [33mEducationDetailsForm[39m[33m,[39m [33mProfileInfoForm[39m[33m,[39m [33mProjectDetailForm[39m[33m,[39m [33mSkillsInfoForm[39m[33m,[39m [33mWorkExperienceForm[39m } [36mfrom[39m [32m'./Forms'[39m
+[31m[1m>[22m[39m[90m 13 |[39m [36mimport[39m html2pdf [36mfrom[39m [32m'html2pdf.js'[39m
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 14 |[39m [36mimport[39m [33mStepProgress[39m [36mfrom[39m [32m'./StepProgress'[39m
+ [90m 15 |[39m [36mimport[39m [33mThemeSelector[39m [36mfrom[39m [32m'./ThemeSelector'[39m
+ [90m 16 |[39m [36mimport[39m [33mRenderResume[39m [36mfrom[39m [32m'./RenderResume'[39m[0m
+
+
+
+Import trace:
+  Server Component:
+    ./app/components/EditResume.jsx
+    ./app/editor/[id]/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./app/components/TemplateOne.jsx:3:1
+Module not found: Can't resolve 'react-icons/lu'
+[0m [90m 1 |[39m [32m"use client"[39m
+ [90m 2 |[39m [36mimport[39m [33mReact[39m[33m,[39m { useEffect[33m,[39m useRef[33m,[39m useState } [36mfrom[39m [32m"react"[39m[33m;[39m
+[31m[1m>[22m[39m[90m 3 |[39m [36mimport[39m { [33mLuMail[39m[33m,[39m [33mLuPhone[39m[33m,[39m [33mLuGithub[39m[33m,[39m [33mLuGlobe[39m } [36mfrom[39m [32m"react-icons/lu"[39m[33m;[39m
+ [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 4 |[39m [36mimport[39m { [33mRiLinkedinLine[39m } [36mfrom[39m [32m"react-icons/ri"[39m[33m;[39m
+ [90m 5 |[39m [36mimport[39m {
+ [90m 6 |[39m   [33mEducationInfo[39m[33m,[39m[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./app/components/TemplateOne.jsx [Client Component Browser]
+    ./app/components/RenderResume.jsx [Client Component Browser]
+    ./app/components/EditResume.jsx [Client Component Browser]
+    ./app/components/EditResume.jsx [Server Component]
+    ./app/editor/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/components/TemplateOne.jsx [Client Component SSR]
+    ./app/components/RenderResume.jsx [Client Component SSR]
+    ./app/components/EditResume.jsx [Client Component SSR]
+    ./app/components/EditResume.jsx [Server Component]
+    ./app/editor/[id]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./app/components/TemplateTwo.jsx:3:1
+Module not found: Can't resolve 'react-icons/lu'
+[0m [90m 1 |[39m [32m"use client"[39m[33m;[39m
+ [90m 2 |[39m [36mimport[39m [33mReact[39m[33m,[39m { useEffect[33m,[39m useRef[33m,[39m useState } [36mfrom[39m [32m"react"[39m[33m;[39m
+[31m[1m>[22m[39m[90m 3 |[39m [36mimport[39m { [33mLuExternalLink[39m[33m,[39m [33mLuGithub[39m } [36mfrom[39m [32m"react-icons/lu"[39m[33m;[39m
+ [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 4 |[39m [36mimport[39m { formatYearMonth } [36mfrom[39m [32m"../utils/helper"[39m[33m;[39m
+ [90m 5 |[39m
+ [90m 6 |[39m [36mconst[39m sectionTitleClass [33m=[39m [32m"text-base font-bold uppercase tracking-wide mb-1 pb-1 border-b border-gray-300"[39m[33m;[39m[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./app/components/TemplateTwo.jsx [Client Component Browser]
+    ./app/components/RenderResume.jsx [Client Component Browser]
+    ./app/components/EditResume.jsx [Client Component Browser]
+    ./app/components/EditResume.jsx [Server Component]
+    ./app/editor/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/components/TemplateTwo.jsx [Client Component SSR]
+    ./app/components/RenderResume.jsx [Client Component SSR]
+    ./app/components/EditResume.jsx [Client Component SSR]
+    ./app/components/EditResume.jsx [Server Component]
+    ./app/editor/[id]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./app/components/TemplateOne.jsx:4:1
+Module not found: Can't resolve 'react-icons/ri'
+[0m [90m 2 |[39m [36mimport[39m [33mReact[39m[33m,[39m { useEffect[33m,[39m useRef[33m,[39m useState } [36mfrom[39m [32m"react"[39m[33m;[39m
+ [90m 3 |[39m [36mimport[39m { [33mLuMail[39m[33m,[39m [33mLuPhone[39m[33m,[39m [33mLuGithub[39m[33m,[39m [33mLuGlobe[39m } [36mfrom[39m [32m"react-icons/lu"[39m[33m;[39m
+[31m[1m>[22m[39m[90m 4 |[39m [36mimport[39m { [33mRiLinkedinLine[39m } [36mfrom[39m [32m"react-icons/ri"[39m[33m;[39m
+ [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 5 |[39m [36mimport[39m {
+ [90m 6 |[39m   [33mEducationInfo[39m[33m,[39m
+ [90m 7 |[39m   [33mWorkExperience[39m[33m,[39m[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./app/components/TemplateOne.jsx [Client Component Browser]
+    ./app/components/RenderResume.jsx [Client Component Browser]
+    ./app/components/EditResume.jsx [Client Component Browser]
+    ./app/components/EditResume.jsx [Server Component]
+    ./app/editor/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/components/TemplateOne.jsx [Client Component SSR]
+    ./app/components/RenderResume.jsx [Client Component SSR]
+    ./app/components/EditResume.jsx [Client Component SSR]
+    ./app/components/EditResume.jsx [Server Component]
+    ./app/editor/[id]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at <unknown> (./app/components/EditResume.jsx:8:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./app/components/EditResume.jsx:9:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./app/components/EditResume.jsx:11:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./app/components/ThemeSelector.jsx:3:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./app/components/TemplateOne.jsx:11:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./app/components/TemplateThree.jsx:3:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./app/components/TemplateTwo.jsx:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./app/components/CreateResumeForm.jsx:6:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./app/components/EditResume.jsx:13:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./app/components/TemplateOne.jsx:3:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./app/components/TemplateTwo.jsx:3:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./app/components/TemplateOne.jsx:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)

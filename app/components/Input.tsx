@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useRef, useState, useEffect, ChangeEvent } from 'react';
-import { inputStyles, photoSelectorStyles, titleInputStyles } from '@/public/assets/dummystyle';
+import React, { useRef, useState, ChangeEvent } from 'react';
+import { inputStyles, photoSelectorStyles, titleInputStyles } from '@/src/assets/dummystyle';
 import { EyeOff, Eye, Edit, Check, Camera, Trash2 } from 'lucide-react';
 
 // --- MAIN INPUT COMPONENT ---
@@ -57,29 +57,27 @@ interface PhotoProps {
   setPreview?: (url: string | null) => void;
 }
 
-export const ProfilePhotoSelector = ({ image, setImage, preview, setPreview }: PhotoProps) => {
+export const ProfilePhotoSelector = ({ image: _image, setImage, preview, setPreview }: PhotoProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const [previewUrl, setPreviewUrl] = useState<string | null>(preview || null);
+  const [localUrl, setLocalUrl] = useState<string | null>(null);
   const [hovered, setHovered] = useState(false);
   const styles = photoSelectorStyles;
 
-  useEffect(() => {
-    if (preview) setPreviewUrl(preview);
-  }, [preview]);
+  const currentPreviewUrl = localUrl || preview;
 
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       setImage(file);
       const url = URL.createObjectURL(file);
-      setPreviewUrl(url);
+      setLocalUrl(url);
       setPreview?.(url);
     }
   };
 
   const handleRemove = () => {
     setImage(null);
-    setPreviewUrl(null);
+    setLocalUrl(null);
     setPreview?.(null);
   };
 
@@ -94,7 +92,7 @@ export const ProfilePhotoSelector = ({ image, setImage, preview, setPreview }: P
         onChange={handleImageChange} 
         className={styles.hiddenInput} 
       />
-      {!previewUrl ? (
+      {!currentPreviewUrl ? (
         <div
           className={styles.placeholder(hovered)}
           onClick={chooseFile}
@@ -112,7 +110,7 @@ export const ProfilePhotoSelector = ({ image, setImage, preview, setPreview }: P
           onMouseLeave={() => setHovered(false)}
         >
           <div className={styles.previewImageContainer(hovered)} onClick={chooseFile}>
-            <img src={previewUrl} alt="profile" className={styles.previewImage} />
+            <img src={currentPreviewUrl} alt="profile" className={styles.previewImage} />
           </div>
           <div className={styles.overlay}>
             <button type="button" className={styles.actionButton('white/80','white','gray-800')} onClick={chooseFile}>

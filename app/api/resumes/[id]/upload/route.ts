@@ -6,11 +6,15 @@ import { resumes } from "@/src/db/schema";
 import { eq, and } from "drizzle-orm";
 import { getDataFromToken } from "@/src/helpers/getDataFromToken";
 
-export async function POST(request: NextRequest, { params }: { params: { id: string } }) {
+export async function POST(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
     try {
         // 1. Security: Identify User and Resume ID
         const userId = await getDataFromToken(request);
-        const resumeId = parseInt(params.id);
+        if (!userId) {
+            return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+        }
+        const { id } = await params;
+        const resumeId = parseInt(id);
 
         const formData = await request.formData();
         const file = formData.get("profileImage") as File; // 'profileImage' matches your frontend input name

@@ -433,7 +433,7 @@ export const modalStyles = {
 export const infoStyles = {
   // Progress
   progressWrapper: "w-20 h-2 rounded-full bg-gray-200",
-  progressBar: color => `h-full rounded-full transition-all`,
+  progressBar: _color => `h-full rounded-full transition-all`,
 
   // ActionLink
   actionWrapper: "flex items-center gap-3",
@@ -444,7 +444,7 @@ export const infoStyles = {
   certContainer: "mb-4",
   certTitle: "text-base font-semibold text-gray-900",
   certRow: "flex items-center gap-2 mt-1",
-  certYear: bgColor => `text-xs font-bold text-white px-3 py-1 rounded-lg`,
+  certYear: _bgColor => `text-xs font-bold text-white px-3 py-1 rounded-lg`,
   certIssuer: "text-sm text-gray-600 font-medium",
 
   // ContactInfo
@@ -483,6 +483,6 @@ export const infoStyles = {
   workHeader: "flex items-start justify-between mb-2",
   workCompany: "text-base font-semibold pb-2 text-gray-900",
   workRole: "text-base font-medium text-gray-700",
-  workDuration: color => `text-sm font-bold italic`,
+  workDuration: _color => `text-sm font-bold italic`,
   workDesc: "text-sm text-gray-600 font-medium leading-relaxed"
 };

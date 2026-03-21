@@ -1,14 +1,14 @@
 "use client"
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import DashboardLayout from './DashboardLayout'
-import { containerStyles, buttonStyles, statusStyles, iconStyles } from '../assets/dummystyle'
+import { containerStyles, buttonStyles, statusStyles, iconStyles } from '@/src/assets/dummystyle'
 import { TitleInput } from './Input'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams, useRouter } from 'next/navigation'
 import { AlertCircle, ArrowLeft, Check, Download, Loader2, Palette, Save, Trash2 } from 'lucide-react'
-import { API_PATHS } from '../utils/apiPaths'
-import axiosInstance from '../utils/axiosInstance'
+import { API_PATHS } from '@/src/utils/apiPaths'
+import axiosInstance from '@/src/utils/axiosInstance'
 import toast from 'react-hot-toast'
-import { fixTailwindColors } from '../utils/color'
+import { fixTailwindColors } from '@/src/utils/color'
 import { AdditionalInfoForm, CertificationInfoForm, ContactInfoForm, EducationDetailsForm, ProfileInfoForm, ProjectDetailForm, SkillsInfoForm, WorkExperienceForm } from './Forms'
 import html2pdf from 'html2pdf.js'
 import StepProgress from './StepProgress'
@@ -38,8 +38,8 @@ const useResizeObserver = () => {
 
 const EditResume = () => {
 
-  const { resumeId } = useParams()
-  const navigate = useNavigate()
+  const { id: resumeId } = useParams()
+  const router = useRouter()
   const resumeDownloadRef = useRef(null)
   const thumbnailRef = useRef(null)
 
@@ -77,11 +77,9 @@ const EditResume = () => {
     },
     workExperience: [
       {
-        company: "",
-        role: "",
-        startDate: "",
         endDate: "",
         description: "",
+        technologies: "",
       },
     ],
     education: [
@@ -90,6 +88,7 @@ const EditResume = () => {
         institution: "",
         startDate: "",
         endDate: "",
+        courses: "",
       },
     ],
     skills: [
@@ -104,6 +103,7 @@ const EditResume = () => {
         description: "",
         github: "",
         liveDemo: "",
+        technologies: "",
       },
     ],
     certifications: [
@@ -202,7 +202,7 @@ const EditResume = () => {
   }, [resumeData]);
 
   // Validate Inputs
-  const validateAndNext = (e) => {
+  const validateAndNext = (_e) => {
     const errors = []
 
     switch (currentPage) {
@@ -317,7 +317,7 @@ const EditResume = () => {
       "additionalInfo",
     ]
 
-    if (currentPage === "profile-info") navigate("/dashboard")
+    if (currentPage === "profile-info") router.push("/dashboard")
 
     const currentIndex = pages.indexOf(currentPage)
     if (currentIndex > 0) {
@@ -486,15 +486,26 @@ const EditResume = () => {
     try {
       const response = await axiosInstance.get(API_PATHS.RESUME.GET_BY_ID(resumeId))
 
-      if (response.data && response.data.profileInfo) {
+      if (response.data) {
         const resumeInfo = response.data
 
         setResumeData((prevState) => ({
           ...prevState,
           title: resumeInfo?.title || "Untitled",
-          template: resumeInfo?.template || prevState?.template,
-          profileInfo: resumeInfo?.profileInfo || prevState?.profileInfo,
-          contactInfo: resumeInfo?.contactInfo || prevState?.contactInfo,
+          thumbnailLink: resumeInfo?.thumbnailLink || "",
+          profileInfo: {
+            fullName: resumeInfo?.fullName || "",
+            designation: resumeInfo?.designation || "",
+            summary: resumeInfo?.summary || "",
+          },
+          contactInfo: {
+            email: resumeInfo?.email || "",
+            phone: resumeInfo?.phone || "",
+            location: resumeInfo?.location || "",
+            linkedin: resumeInfo?.linkedin || "",
+            github: resumeInfo?.github || "",
+            website: resumeInfo?.website || "",
+          },
           workExperience: resumeInfo?.workExperience || prevState?.workExperience,
           education: resumeInfo?.education || prevState?.education,
           skills: resumeInfo?.skills || prevState?.skills,
@@ -554,7 +565,7 @@ const EditResume = () => {
       await updateResumeDetails(thumbnailLink)
 
       toast.success("Resume Updated Successfully")
-      navigate("/dashboard")
+      router.push("/dashboard")
     } catch (error) {
       console.error("Error Uploading Images:", error)
       toast.error("Failed to upload images")
@@ -569,9 +580,22 @@ const EditResume = () => {
     try {
       setIsLoading(true)
 
+      const flattenedData = {
+        title: resumeData.title,
+        ...resumeData.profileInfo,
+        ...resumeData.contactInfo,
+        workExperience: resumeData.workExperience,
+        education: resumeData.education,
+        skills: resumeData.skills,
+        projects: resumeData.projects,
+        certifications: resumeData.certifications,
+        languages: resumeData.languages,
+        interests: resumeData.interests,
+        thumbnailLink: thumbnailLink || resumeData.thumbnailLink || "",
+      };
+
       await axiosInstance.put(API_PATHS.RESUME.UPDATE(resumeId), {
-        ...resumeData,
-        thumbnailLink: thumbnailLink || "",
+        ...flattenedData,
         completion: completionPercentage,
       })
     } catch (err) {
@@ -590,7 +614,7 @@ const EditResume = () => {
       setIsLoading(true)
       await axiosInstance.delete(API_PATHS.RESUME.DELETE(resumeId))
       toast.success("Resume deleted successfully")
-      navigate("/dashboard")
+      router.push("/dashboard")
     } catch (error) {
       console.error("Error deleting resume:", error)
       toast.error("Failed to delete resume")

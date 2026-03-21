@@ -1,6 +1,6 @@
 "use client"
 import React, { useRef, useState, useEffect } from 'react'
-import { DUMMY_RESUME_DATA, resumeTemplates } from '../utils/data'
+import { DUMMY_RESUME_DATA, resumeTemplates } from '@/src/utils/data'
 import { TemplateCard } from './Cards'
 import Tabs from './Tabs';
 import { Check } from 'lucide-react';

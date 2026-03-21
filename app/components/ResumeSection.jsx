@@ -1,6 +1,6 @@
 import React from 'react';
 import { ExternalLink, Github } from 'lucide-react';
-import { infoStyles as styles } from '../assets/dummystyle';
+import { infoStyles as styles } from '@/src/assets/dummystyle';
 
 export const Progress = ({ progress, color }) => (
   <div className={styles.progressWrapper}>

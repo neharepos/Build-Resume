@@ -1,12 +1,12 @@
 "use client"; // Critical: Tells Next.js this is a Client Component
 
 import React, { useContext, useState, ChangeEvent, FormEvent } from 'react';
-import { useRouter } from 'next/navigation'; // Correct Next.js Import
 import { UserContext } from '@/src/context/UserContext';
 // import axiosInstance from '../utils/axiosInstance';
 import { API_PATHS } from '@/src/utils/apiPaths';
-import { authStyles as styles } from '@/public/assets/dummystyle';
+import { authStyles as styles } from '@/src/assets/dummystyle';
 import Input from './Input';
+import toast from 'react-hot-toast';
 import { validateEmail } from '@/src/utils/helper';
 
 interface LoginProps {
@@ -14,20 +14,14 @@ interface LoginProps {
   onSuccess?: () => void;
 }
 
-const Login = ({ setCurrentPage, onSuccess }: LoginProps) => {
+const Login = ({ setCurrentPage, onSuccess: _onSuccess }: LoginProps) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
 
 
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setEmail(value);
-    // You could add: if(value.includes('@')) { ... }
-  };
-  
-  const { updateUser } = useContext(UserContext);
-  const router = useRouter(); // Next.js router hook
+  const { updateUser: _updateUser } = useContext(UserContext);
+  // router is not used because we use window.location.href for hard navigation
 
  const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -57,17 +51,14 @@ const Login = ({ setCurrentPage, onSuccess }: LoginProps) => {
       const data = await response.json();
 
       if (response.ok) {
-        // Next.js handles the token and state
-        localStorage.setItem('token', data.token);
-        updateUser(data);
-
-        if (onSuccess) onSuccess();
-        router.push('/dashboard'); 
+        toast.success("Login successful!");
+        // Force hard navigation to securely trigger UserContext refetch with the new HTTP-only cookie
+        window.location.href = '/dashboard';
       } else {
-        // Handle backend errors (like 401 Unauthorized)
-        setError(data.message || 'Login failed. Please try again.');
+        // Handle backend errors (like 401 Unauthorized, 403 Forbidden)
+        setError(data.error || data.message || 'Login failed. Please try again.');
       }
-    } catch (err) {
+    } catch (_err) {
       setError('Network error. Please check your connection.');
     }
   };

@@ -14,7 +14,7 @@ export const fixTailwindColors = (element) => {
       // Use a real library to convert the space
       const c = new Color(colorValue);
       return c.to('srgb').toString({ format: 'rgb' });
-    } catch (e) {
+    } catch (_e) {
       // Fallback to a safe color if conversion fails
       return 'rgb(0, 0, 0)'; 
     }

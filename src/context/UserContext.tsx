@@ -1,7 +1,6 @@
 "use client"; // Mandatory for Next.js Context
 
 import React, { createContext, useState, useEffect, ReactNode, useContext } from "react";
-import { API_PATHS } from "../utils/apiPaths";
 
 // 1. Define the User Type (Adjust properties based on your backend)
 interface User {
@@ -28,33 +27,22 @@ const UserProvider = ({ children }: { children: ReactNode }) => {
 
     const clearUser = () => {
         setUser(null);
-        localStorage.removeItem('token');
     };
 
     const fetchUser = async () => {
-        const accessToken = localStorage.getItem('token');
-        
-        if (!accessToken) {
-            setLoading(false);
-            return;
-        }
-
         try {
-            const response = await fetch(API_PATHS.AUTH.GET_PROFILE, {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${accessToken}`, // Manual auth header
-                    'Content-Type': 'application/json',
-                },
+            const response = await fetch('/api/users/profile', {
+                credentials: 'include'
             });
-
-            if (!response.ok) throw new Error("Unauthorized");
-
-            const data = await response.json();
-            setUser(data);
+            const result = await response.json();
+            if (response.ok && result.data) {
+                setUser(result.data);
+            } else {
+                setUser(null);
+            }
         } catch (error) {
-            console.error("User not authenticated", error);
-            clearUser();
+            console.error("Failed to fetch user:", error);
+            setUser(null);
         } finally {
             setLoading(false);
         }
@@ -69,9 +57,6 @@ const UserProvider = ({ children }: { children: ReactNode }) => {
 
     const updateUser = (userData: User) => {
         setUser(userData);
-        if (userData.token) {
-            localStorage.setItem('token', userData.token);
-        }
         setLoading(false);
     };
 

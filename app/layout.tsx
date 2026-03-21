@@ -30,10 +30,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {/* <UserProvider> */}
+        <UserProvider>
             {children}
-            {/* <Toaster toastOptions={{ style: { fontSize: "13px" } }} /> */}
-        {/* </UserProvider> */}
+            <Toaster toastOptions={{ style: { fontSize: "13px" } }} />
+        </UserProvider>
         
       </body>
     </html>

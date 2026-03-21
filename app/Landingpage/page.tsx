@@ -1,24 +1,18 @@
 "use client"; // Required for hooks like useState/useContext in Next.js
 
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation'; // Correct Next.js router
 import Link from 'next/link'; // For optimized footer links
-import { landingPageStyles } from '@/public/assets/dummystyle';
-import { Download, LayoutTemplate, Menu, X, Zap, ArrowRight } from 'lucide-react';
-import { UserContext } from '@/src/context/UserContext'
+import { landingPageStyles } from '@/src/assets/dummystyle';
+import { LayoutTemplate, Menu, X, ArrowRight } from 'lucide-react';
+import { useUser } from '@/src/context/UserContext'
 import { ProfileInCard } from '../components/Cards';
 import Modal from '../components/Modal';
 import Login from '../components/Login';
 import Signup from '../components/Signup';
 
 const LandingPage = () => {
-    const context = useContext(UserContext);
-
-    if(!context){
-        return null;
-    }
-
-    const {user} = context
+    const { user } = useUser();
     const router = useRouter();
     
     const [openAuthModel, setOpenAuthModel] = useState(false);
@@ -133,6 +127,9 @@ const LandingPage = () => {
                     setCurrentPage("login");
                 }} 
                 hideHeader
+                title=""
+                showActionBtn={false}
+                actionBtnText=""
             >
                 <div className="p-4">
                     {currentPage === "login" && (

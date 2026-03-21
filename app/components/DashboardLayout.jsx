@@ -1,11 +1,8 @@
 "use client"
-import React, { useContext } from 'react'
-import { UserContext } from '@/src/context/UserContext'
+import React from 'react'
 import Navbar from './Navbar'
 
 const DashboardLayout = ({ activeMenu, children }) => {
-
-    const context = useContext(UserContext)
 
 //     if (!context) {
 //         return <div className="min-h-screen bg-zinc-950" />; 
@@ -29,10 +26,18 @@ const DashboardLayout = ({ activeMenu, children }) => {
 // }
 
 return (
-        <div className="min-h-screen bg-white text-black"> 
-            <Navbar activeMenu={activeMenu}/>
-            <div className='container mx-auto pt-4 pb-4'>
-                {children}
+        <div className="min-h-screen bg-zinc-950 text-white selection:bg-violet-500/30"> 
+            {/* Background decorative elements */}
+            <div className="fixed inset-0 overflow-hidden pointer-events-none">
+                <div className="absolute top-0 left-1/4 w-96 h-96 bg-violet-600/10 blur-[120px] rounded-full"></div>
+                <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-fuchsia-600/10 blur-[120px] rounded-full"></div>
+            </div>
+
+            <div className="relative z-10">
+                <Navbar activeMenu={activeMenu}/>
+                <main className='container mx-auto pt-8 pb-12 px-4 md:px-6'>
+                    {children}
+                </main>
             </div>
         </div>
     )

@@ -1,6 +1,6 @@
 "use client"
 import React, { useEffect, useRef, useState } from "react";
-import { formatYearMonth } from "../utils/helper";
+import { formatYearMonth } from "@/src/utils/helper";
 
 const TemplateThree = ({ resumeData = {}, containerWidth }) => {
   const {
@@ -37,11 +37,12 @@ const TemplateThree = ({ resumeData = {}, containerWidth }) => {
   };
 
   skills.forEach(skill => {
-    if (["Selenium/Webdriver", "TestNG", "Jenkins"].includes(skill.name)) {
+    const skillName = skill.name?.toLowerCase() || "";
+    if (["selenium/webdriver", "testng", "jenkins", "testing", "automation"].some(s => skillName.includes(s))) {
       groupedSkills["Automation & Test tools"].push(skill.name);
-    } else if (["Agile", "Scrum", "JIRA", "Microsoft TFS"].includes(skill.name)) {
+    } else if (["agile", "scrum", "jira", "microsoft tfs", "kanban", "management"].some(s => skillName.includes(s))) {
       groupedSkills["Product Management"].push(skill.name);
-    } else if (["Python", "Java", "Javascript", "Databases (MySQL)"].includes(skill.name)) {
+    } else if (["python", "java", "javascript", "databases", "mysql", "sql", "node"].some(s => skillName.includes(s))) {
       groupedSkills.Languages.push(skill.name);
     } else {
       groupedSkills["Other Skills"].push(skill.name);

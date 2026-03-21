@@ -1,10 +1,12 @@
 import nodemailer from "nodemailer";
-import bcryptjs from "bcryptjs";
+
 
 import { db } from "@/src/db/index";
 import { users } from "@/src/db/schema";
 import { eq } from "drizzle-orm";
-import { configDotenv } from "dotenv";
+
+
+import crypto from "crypto";
 
 type EmailParams = {
   email: string;
@@ -24,15 +26,15 @@ export const sendEmail = async ({
     console.log("USER:", process.env.MAILTRAP_USER);
     console.log("PASS:", process.env.MAILTRAP_PASS);
 
-    // create hashed token
-    const hashedToken = await bcryptjs.hash(userId.toString(), 10);
+    // create a secure, URL-safe hexadecimal token
+    const hashedToken = crypto.randomBytes(32).toString('hex');
 
     if (emailType === "VERIFY") {
       await db
         .update(users)
         .set({
           verifyToken: hashedToken,
-          verifyTokenExpiry: new Date(Date.now() + 3600000),
+          verifyTokenExpiry: new Date(Date.now() + 86400000),
         })
         .where(eq(users.id, userId));
     } else if (emailType === "RESET") {
@@ -41,29 +43,20 @@ export const sendEmail = async ({
         .set({
           forgotPasswordToken: hashedToken,
           forgotPasswordTokenExpiry: new Date(
-            Date.now() + 3600000
+            Date.now() + 86400000
           ),
         })
         .where(eq(users.id, userId));
     }
 
-    // const transport = nodemailer.createTransport({
-    //   host: process.env.MAILTRAP_HOST,
-    //   port: Number(process.env.MAILTRAP_PORT) || 2525,
-    //   auth: {
-    //     user: process.env.MAILTRAP_USER,
-    //     pass: process.env.MAILTRAP_PASS,
-    //   },
-    // });
-    
     const transport = nodemailer.createTransport({
-  host: "sandbox.smtp.mailtrap.io",
-  port: 2525,
-  auth: {
-    user: "e19f490b3e6690",
-    pass: "8c37376c888579",
-  },
-});
+      host: process.env.MAILTRAP_HOST,
+      port: Number(process.env.MAILTRAP_PORT) || 2525,
+      auth: {
+        user: process.env.MAILTRAP_USER,
+        pass: process.env.MAILTRAP_PASS,
+      },
+    });
 
      const link =
       emailType === "VERIFY"

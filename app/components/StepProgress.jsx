@@ -1,9 +1,8 @@
 import React from 'react'
-import { shimmerStyle } from '../assets/dummystyle'
-import { Check } from 'react-feather'
-import Progress from './Progress'
+import { shimmerStyle } from '@/src/assets/dummystyle'
+import { Check } from 'lucide-react'
 
-const StepProgress = () => {
+const StepProgress = ({ progress = 0 }) => {
   return (
     <>
         <style>{shimmerStyle}</style>
@@ -16,7 +15,7 @@ const StepProgress = () => {
 
         <div className='relative h-full bg-gradient-to-r from-violet-500 via-fuchsia-500 to-violet-600
         animate-flow bg-[length: 200%_100%] transition-all duration-700 ease-out rounded-full overflow-hidden
-        animate-pulse-glow' style={{ width: `${Progress}%`}}>
+        animate-pulse-glow' style={{ width: `${progress}%`}}>
             
             <div className='absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent 
             animate-shimmar' />
@@ -43,9 +42,9 @@ const StepProgress = () => {
                 {[...Array(12)].map((_,i) => (
                     <div key={i} className='absolute qw-1 h-1 bg-white/60 rounded-full'
                     style={{
-                        left: `${Math.random() * 100}%`,
-                        top: `${Math.random() * 100}%`,
-                        animationDelay: `${Math.random() * 2}s`,
+                        left: `${(i * 23) % 100}%`,
+                        top: `${(i * 37) % 100}%`,
+                        animationDelay: `${(i * 0.17) % 2}s`,
                     }}>
 
                     </div>
@@ -54,7 +53,7 @@ const StepProgress = () => {
         </div>
 
 
-        {Progress > 0 && (
+        {progress > 0 && (
                 <div className='absolute top-0 h-full w-8 bg-gradient-to-r from-transparent
                 via-white/60 to-white/30 blur-sm' style={{ left: `${Math.max(0, progress -4)}%`}}>
                 </div>
@@ -64,17 +63,17 @@ const StepProgress = () => {
 
         <div className='flex justify-between items-center mt-3'>
             <div className='text-xs font-bold text-white/60'>
-                {Progress < 25
+                {progress < 25
                     ? "Greeting Started"
-                    : Progress < 50
+                    : progress < 50
                         ? "Making Progress"
-                        :   Progress < 75
+                        :   progress < 75
                             ? "Almost There"
                             : "Nearly Completed"}
             </div>
 
             <div className='flex items-center gap-2'>
-                    {Progress === 100 && (
+                    {progress === 100 && (
                         <div className='w-6 h-6 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full
                         flex items-center justify-center'>
                             <Check size={12} className="text-white"/>

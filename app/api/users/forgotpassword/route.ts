@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import crypto from "crypto";
 
 import { db } from "@/src/db/index";
 import { users } from "@/src/db/schema";
@@ -25,24 +24,11 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // 2️⃣ Generate reset token
-    const resetToken = crypto.randomBytes(32).toString("hex");
-
-    // 3️⃣ Save token in database
-    await db
-      .update(users)
-      .set({
-        forgotPasswordToken: resetToken,
-        forgotPasswordTokenExpiry: new Date(Date.now() + 3600000),
-      })
-      .where(eq(users.id, user[0].id));
-
-    // 4️⃣ Send reset email
+    // 2️⃣ Send reset email
     await sendEmail({
       email,
       emailType: "RESET",
       userId: user[0].id,
-      token: resetToken,
     });
 
     return NextResponse.json({

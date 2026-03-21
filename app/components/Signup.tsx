@@ -3,8 +3,9 @@
 import React, { useContext, useState, FormEvent, ChangeEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import { UserContext } from '@/src/context/UserContext';
-import { authStyles as styles } from '@/public/assets/dummystyle';
+import { authStyles as styles } from '@/src/assets/dummystyle';
 import { validateEmail } from '@/src/utils/helper';
+import toast from 'react-hot-toast';
 import Input from './Input';
 import { API_PATHS } from '@/src/utils/apiPaths';
 
@@ -13,14 +14,14 @@ interface SignupProps {
   onSuccess?: () => void;
 }
 
-const Signup = ({ setCurrentPage, onSuccess }: SignupProps) => {
+const Signup = ({ setCurrentPage, onSuccess: _onSuccess }: SignupProps) => {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
 
-  const { updateUser } = useContext(UserContext);
-  const router = useRouter();
+  const { updateUser: _updateUser } = useContext(UserContext);
+  const _router = useRouter();
 
   const handleSignup = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -43,11 +44,11 @@ const Signup = ({ setCurrentPage, onSuccess }: SignupProps) => {
 
     try {
       // 2. Using Native Fetch (Better for Next.js)
-      const response = await fetch(API_PATHS.AUTH.REGISTER, {
+      const response = await fetch(API_PATHS.AUTH.SIGNUP, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          name: fullName,
+          username: fullName,
           email,
           password,
         }),
@@ -56,15 +57,12 @@ const Signup = ({ setCurrentPage, onSuccess }: SignupProps) => {
       const data = await response.json();
 
       if (response.ok) {
-        localStorage.setItem('token', data.token);
-        updateUser(data);
-        
-        if (onSuccess) onSuccess(); // Closes modal
-        router.push('/dashboard');  // Moves to Dashboard
+        toast.success("Account created! Please log in (and check your email to verify).");
+        setCurrentPage('login'); // Switch to login tab since they don't have a token yet
       } else {
-        setError(data.message || 'Registration failed.');
+        setError(data.error || data.message || 'Registration failed.');
       }
-    } catch (err) {
+    } catch (_err) {
       setError('Something went wrong. Please try again.');
     }
   };

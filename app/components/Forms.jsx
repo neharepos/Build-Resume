@@ -13,7 +13,7 @@ import {
   projectDetailStyles,
   skillsInfoStyles,
   workExperienceStyles
-} from "../assets/dummystyle";
+} from "@/src/assets/dummystyle";
 
 // AdditionalInfoForm Component
 export const AdditionalInfoForm = ({ languages, interests, updateArrayItem, addArrayItem, removeArrayItem }) => {
@@ -265,6 +265,15 @@ export const EducationDetailsForm = ({ educationInfo, updateArrayItem, addArrayI
                 value={education.endDate || ""}
                 onChange={({ target }) => updateArrayItem(index, "endDate", target.value)}
               />
+
+              <div className="md:col-span-2">
+                <Input
+                  label="Relevant Courses"
+                  placeholder="e.g. Algorithms, Machine Learning, UI/UX"
+                  value={education.courses || ""}
+                  onChange={({ target }) => updateArrayItem(index, "courses", target.value)}
+                />
+              </div>
             </div>
             {educationInfo.length > 1 && (
               <button
@@ -374,9 +383,18 @@ export const ProjectDetailForm = ({ projectInfo, updateArrayItem, addArrayItem, 
               <Input
                 label="Live Demo URL"
                 placeholder="https://yourproject.live"
-                value={project.liveDemo || ""}
+                value={proj.liveDemo || ""}
                 onChange={({ target }) => updateArrayItem(index, "liveDemo", target.value)}
               />
+
+              <div className="md:col-span-2">
+                <Input
+                  label="Technologies (Comma separated)"
+                  placeholder="React, Tailwind, Node.js"
+                  value={proj.technologies || ""}
+                  onChange={({ target }) => updateArrayItem(index, "technologies", target.value)}
+                />
+              </div>
             </div>
 
             {projectInfo.length > 1 && (
@@ -508,6 +526,15 @@ export const WorkExperienceForm = ({ workExperience, updateArrayItem, addArrayIt
                 value={experience.endDate || ""}
                 onChange={({ target }) => updateArrayItem(index, "endDate", target.value)}
               />
+
+              <div className="md:col-span-2">
+                <Input
+                  label="Technologies (Comma separated)"
+                  placeholder="React, AWS, Docker"
+                  value={experience.technologies || ""}
+                  onChange={({ target }) => updateArrayItem(index, "technologies", target.value)}
+                />
+              </div>
             </div>
 
             <div className="mt-6">

@@ -9,6 +9,10 @@ export async function GET(request: NextRequest) {
         // This replaces the 'protect' middleware
         const userId = await getDataFromToken(request);
 
+        if (!userId) {
+            return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+        }
+
         const user = await db.select()
             .from(users)
             .where(eq(users.id, userId));
@@ -18,7 +22,7 @@ export async function GET(request: NextRequest) {
         }
 
         // Don't send the password back!
-        const { password, ...userData } = user[0];
+        const { password: _password, ...userData } = user[0];
 
         return NextResponse.json({
             message: "User found",

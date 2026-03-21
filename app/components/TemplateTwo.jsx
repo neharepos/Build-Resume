@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import { LuExternalLink, LuGithub } from "react-icons/lu";
-import { formatYearMonth } from "../utils/helper";
+import { formatYearMonth } from "@/src/utils/helper";
 
 const sectionTitleClass = "text-base font-bold uppercase tracking-wide mb-1 pb-1 border-b border-gray-300";
 
@@ -38,8 +38,9 @@ const TemplateTwo = ({ resumeData = {}, containerWidth }) => {
         transform: containerWidth > 0 ? `scale(${scale})` : undefined,
         transformOrigin: "top left",
         width: containerWidth > 0 ? `${baseWidth}px` : undefined,
-        height: "1123px",
-        overflow: "hidden",
+        minHeight: "1123px",
+        height: "auto",
+        overflow: "visible",
       }}
     >
       {/* Header Section */}
@@ -137,15 +138,15 @@ const TemplateTwo = ({ resumeData = {}, containerWidth }) => {
                   </p>
                 )}
                 <p className="text-[11px] pb-2 text-gray-700 ">{proj.description}</p>
-                <div className="flex gap-1 mt-0.5 pt-2 text-[11px]">
+                <div className="flex gap-2 mt-1 pt-1 text-[11px]">
                   {proj.github && (
-                    <a href={proj.github} className="flex items-center gap-0.5 hover:underline text-blue-600">
-                      <LuGithub size={10} /> GitHub
+                    <a href={proj.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:underline text-blue-600">
+                      <LuGithub size={12} /> GitHub
                     </a>
                   )}
                   {proj.liveDemo && (
-                    <a href={proj.liveDemo} className="flex items-center gap-0.5 hover:underline text-blue-600">
-                      <LuExternalLink size={10} /> Demo
+                    <a href={proj.liveDemo} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:underline text-blue-600">
+                      <LuExternalLink size={12} /> Demo
                     </a>
                   )}
                 </div>

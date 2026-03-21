@@ -2,10 +2,9 @@
 
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { LucideFilePlus, LucideTrash2 } from "lucide-react";
-import axios from "axios";
+import { LucideFilePlus } from "lucide-react";
+import axiosInstance from "@/src/utils/axiosInstance";
 import toast from "react-hot-toast";
-import moment from "moment";
 
 // 1. Define Interfaces for Type Safety
 interface ResumeData {
@@ -14,16 +13,15 @@ interface ResumeData {
   updatedAt: string;
   thumbnailLink?: string;
   completion?: number;
-  profileInfo?: {
-    fullName: string;
-    designation: string;
-    summary: string;
-  };
-  contactInfo?: {
-    email: string;
-    phone: string;
-  };
-  // Add other sections as needed
+  fullName: string;
+  designation: string;
+  summary: string;
+  email: string;
+  phone: string;
+  skills?: any[];
+  education?: any[];
+  workExperience?: any[];
+  projects?: any[];
 }
 
 // Components - Ensure these are typed as React.FC or similar
@@ -44,33 +42,39 @@ const Dashboard: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   // 3. Type the parameter and return value of the logic functions
-  const calculateCompletion = (resume: ResumeData): number => {
+  const calculateCompletion = (resume: any): number => {
     let completedFields = 0;
-    let totalFields = 5; // Base fields for Profile + Contact
+    const sections = [
+        resume.fullName,
+        resume.designation,
+        resume.summary,
+        resume.email,
+        resume.phone,
+        resume.skills && resume.skills.length > 0,
+        resume.education && resume.education.length > 0,
+        resume.workExperience && resume.workExperience.length > 0,
+        resume.projects && resume.projects.length > 0
+    ];
 
-    if (resume.profileInfo?.fullName) completedFields++;
-    if (resume.profileInfo?.designation) completedFields++;
-    if (resume.profileInfo?.summary) completedFields++;
-    if (resume.contactInfo?.email) completedFields++;
-    if (resume.contactInfo?.phone) completedFields++;
+    sections.forEach(field => {
+        if (field) completedFields++;
+    });
 
-    return totalFields > 0
-      ? Math.round((completedFields / totalFields) * 100)
-      : 0;
+    return Math.round((completedFields / sections.length) * 100);
   };
+
+  useEffect(() => {
+    fetchAllResumes();
+  }, []);
 
   const fetchAllResumes = async () => {
     setLoading(true);
     setError(null);
     try {
-        // 1. Get the token (same way we do in UserContext)
-        const token = localStorage.getItem('token');
-
-        // 2. Use fetch with the Authorization header
+        // HTTP-only cookie is sent automatically by fetch
         const response = await fetch("/api/resumes", {
             method: "GET",
             headers: {
-                "Authorization": `Bearer ${token}`,
                 "Content-Type": "application/json",
             },
         });
@@ -100,10 +104,10 @@ const Dashboard: React.FC = () => {
   const handleDeleteResume = async (): Promise<void> => {
     if (!resumeToDelete) return;
     try {
-      await axios.delete(`/api/resumes/${resumeToDelete}`);
+      await axiosInstance.delete(`/api/resumes/${resumeToDelete}`);
       toast.success("Resume deleted");
       fetchAllResumes();
-    } catch (error: any) {
+    } catch (_error: any) {
       toast.error("Failed to delete");
     } finally {
       setResumeToDelete(null);
@@ -130,6 +134,12 @@ const Dashboard: React.FC = () => {
             Create Now <LucideFilePlus size={18} />
           </button>
         </div>
+
+        {error && (
+            <div className="bg-red-500/10 border border-red-500/50 text-red-500 p-4 rounded-lg mb-6">
+                {error}
+            </div>
+        )}
 
         {loading ? (
           <div className="flex justify-center py-20">
@@ -171,8 +181,8 @@ const Dashboard: React.FC = () => {
       <Modal
         isOpen={openCreateModal}
         onClose={() => setOpenCreateModal(false)}
-        title="Create New Resume" // Added this
-        hideHeader={false} // Added this
+        title="Create New Resume"
+        hideHeader={false}
         showActionBtn={false}
         actionBtnText = "Submit"
       >
@@ -182,6 +192,20 @@ const Dashboard: React.FC = () => {
             fetchAllResumes();
           }}
         />
+      </Modal>
+
+      <Modal
+        isOpen={showDeleteConfirm}
+        onClose={() => setShowDeleteConfirm(false)}
+        title="Delete Resume"
+        hideHeader={false}
+        showActionBtn={true}
+        actionBtnText="Delete"
+        onActionClick={handleDeleteResume}
+      >
+        <div className="p-4 text-white">
+          <p>Are you sure you want to delete this resume? This action cannot be undone.</p>
+        </div>
       </Modal>
     </DashboardLayout>
   );

@@ -40,10 +40,8 @@ export async function POST(request: NextRequest) {
       message: "Email verified successfully",
       success: true,
     });
-  } catch (error: any) {
-    return NextResponse.json(
-      { error: error.message },
-      { status: 400 }
-    );
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "An unknown error occurred";
+    return NextResponse.json({ error: message }, { status: 400 });
   }
 }

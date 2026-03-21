@@ -1,5 +1,5 @@
 import React from 'react'
-import { modalStyles as styles } from '@/public/assets/dummystyle'
+import { modalStyles as styles } from '@/src/assets/dummystyle'
 import {X} from 'lucide-react'
 
 const Modal = ({

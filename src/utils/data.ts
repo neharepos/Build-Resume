@@ -1,12 +1,8 @@
-import Resume1 from "../assets/Resume1.png"
-import Resume2 from "../assets/Resume2.png"
-import Resume3 from "../assets/Resume3.png"
-
 // Keep this: Your UI needs to know which templates exist
 export const resumeTemplates = [
-    { id: "01", thumbnailImg: Resume1, colorPaletteCode: "themeOne" },
-    { id: "02", thumbnailImg: Resume2, colorPaletteCode: "themeTwo" },
-    { id: "03", thumbnailImg: Resume3, colorPaletteCode: "themeThree" },
+    { id: "01", thumbnailImg: "/assets/Resume1.png", colorPaletteCode: "themeOne" },
+    { id: "02", thumbnailImg: "/assets/Resume2.png", colorPaletteCode: "themeTwo" },
+    { id: "03", thumbnailImg: "/assets/Resume3.png", colorPaletteCode: "themeThree" },
 ]
 
 // Only keep a "Blank" version for the Create Form
